@@ -1,3 +1,3 @@
-import { Num } from './Num'
+import { Name } from "./NameMain";
 
-export { Num }
+export { Name }
