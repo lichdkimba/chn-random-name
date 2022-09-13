@@ -11,7 +11,7 @@ const generate_CN_random_name = (config: NameProps): NameType => {
   FamilyName = GetFromRandomArray(CnFamilyNameData)
   if (config.Gender === 'Female') {
     // 决定单字名或双字名
-    if (Math.random() >= 0.1) {
+    if (Math.random() >= 0.9) {
       const temp_random = Math.floor(
         Math.random() * CnSingleGivenNameFemale.length
       )
@@ -22,7 +22,7 @@ const generate_CN_random_name = (config: NameProps): NameType => {
     }
   }
   if (config.Gender === 'Male') {
-    if (Math.random() >= 0.5) {
+    if (Math.random() >= 0.9) {
       const temp_random = Math.floor(
         Math.random() * CnSingleGivenNameMale.length
       )
