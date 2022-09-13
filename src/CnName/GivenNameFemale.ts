@@ -1,4 +1,5 @@
 // 整理自 https://github.com/wainshine/Chinese-Names-Corpus
+// 暂无有频次资料
 
 const CnGivenNameFemale = [
   '冰冰',

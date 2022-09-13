@@ -1,5 +1,5 @@
 // 整理自 https://github.com/wainshine/Chinese-Names-Corpus
-
+// 暂无有频次资料
 const CnGivenNameMale = [
   '飞飞',
   '文文',

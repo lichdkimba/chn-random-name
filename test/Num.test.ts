@@ -24,6 +24,20 @@ test('generate Male 100', () => {
   console.log(names)
 })
 
+test('generate EN Female 100', () => {
+  let names = []
+  for (let i = 0; i < 100; i++) {
+    let name = new Name({
+      Gender: 'Female',
+      Type: 'ENG'
+    }).Name
+    names.push(name)
+    expect(typeof name).toBe('string')
+  }
+  console.log(names)
+})
+
+
 //
 // test('toString', () => {
 //   expect(new Num(5).toString()).toBe('5')
