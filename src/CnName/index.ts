@@ -1,21 +1,14 @@
 import { CnFamilyNameData } from './FamilyName'
 import { CnGivenNameFemale, CnSingleGivenNameFemale } from './GivenNameFemale'
 import { CnGivenNameMale, CnSingleGivenNameMale } from './GivenNameMale'
+import { GetFromRandomArray } from '../NameMain/utils'
 
 const generate_CN_random_name = (config: NameProps): NameType => {
   let FamilyName = ''
   const MiddleName = ''
   let GivenName = ''
   // 生成姓氏
-  let temp_max: number = CnFamilyNameData[CnFamilyNameData.length - 1][1]
-  temp_max = Math.random() * temp_max
-  CnFamilyNameData.some((item) => {
-    if (temp_max >= item[1]) {
-      return false
-    }
-    FamilyName = item[0]
-    return true
-  })
+  FamilyName = GetFromRandomArray(CnFamilyNameData)
   if (config.Gender === 'Female') {
     // 决定单字名或双字名
     if (Math.random() >= 0.1) {

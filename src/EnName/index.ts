@@ -1,19 +1,21 @@
 import { EnFamilyNameData } from './FamilyName'
+import { GetFromRandomArray } from '../NameMain/utils'
+import { EnGivenNameFemale } from './GivenNameFemale'
+import { EnGivenNameMale } from './GivenNameMale'
 
 const generate_EN_random_name = (config: NameProps): NameType => {
   let FamilyName = ''
   const MiddleName = ''
   let GivenName = ''
   // 生成姓氏
-  let temp_max: number = EnFamilyNameData[EnFamilyNameData.length - 1][1]
-  temp_max = Math.random() * temp_max
-  EnFamilyNameData.some((item) => {
-    if (temp_max >= item[1]) {
-      return false
-    }
-    FamilyName = item[0]
-    return true
-  })
+  FamilyName = GetFromRandomArray(EnFamilyNameData)
+  if (config.Gender === 'Female') {
+    GivenName = GetFromRandomArray(EnGivenNameFemale)
+  }
+  if (config.Gender === 'Male') {
+    GivenName = GetFromRandomArray(EnGivenNameMale)
+  }
+
   return {
     FamilyName,
     MiddleName,
