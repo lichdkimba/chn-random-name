@@ -1,6 +1,6 @@
 {
-  "name": "chn-random-name",
-  "version": "0.0.1",
+  "name": "@lichdkimba/chn-random-name",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -19,7 +19,7 @@
     "package": "npm run build && npm pack",
     "test": "jest --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "addscope": "node tools/packagejson name @tomchen/example-typescript-package"
+    "addscope": "node tools/packagejson name @lichdkimba/chn-random-name"
   },
   "publishConfig": {
     "access": "public"
