@@ -1,10 +1,10 @@
 // 人名类
-import {generate_CN_random_name} from "../CnName";
+import { generate_CN_random_name } from '../CnName'
 
 class Name {
-  public GivenName: string;
-  public FamilyName: string;
-  public MiddleName: string | undefined;
+  public GivenName: string
+  public FamilyName: string
+  public MiddleName: string | undefined
   public Type: 'CHN'
   public Gender: 'Male' | 'Female'
   public Name: string
@@ -27,8 +27,8 @@ class Name {
     }
 
     if (this.Type === 'CHN') {
-      let temp_name = generate_CN_random_name({
-        Gender: this.Gender
+      const temp_name = generate_CN_random_name({
+        Gender: this.Gender,
       })
       this.GivenName = temp_name.GivenName
       this.FamilyName = temp_name.FamilyName
@@ -36,13 +36,13 @@ class Name {
     }
 
     if (name.GivenName) {
-      this.GivenName = name.GivenName;
+      this.GivenName = name.GivenName
     }
     if (name.FamilyName) {
-      this.FamilyName = name.FamilyName;
+      this.FamilyName = name.FamilyName
     }
     if (name.MiddleName) {
-      this.MiddleName = name.MiddleName;
+      this.MiddleName = name.MiddleName
     }
 
     if (this.NameOrder === 'FMG') {
@@ -62,5 +62,4 @@ class Name {
   }
 }
 
-
-export {Name}
+export { Name }

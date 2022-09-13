@@ -4,7 +4,7 @@ import { CnGivenNameMale, CnSingleGivenNameMale } from './GivenNameMale'
 
 const generate_CN_random_name = (config: NameProps): NameType => {
   let FamilyName = ''
-  let MiddleName = ''
+  const MiddleName = ''
   let GivenName = ''
   // 生成姓氏
   let temp_max: number = CnFamilyNameData[CnFamilyNameData.length - 1][1]
@@ -19,7 +19,9 @@ const generate_CN_random_name = (config: NameProps): NameType => {
   if (config.Gender === 'Female') {
     // 决定单字名或双字名
     if (Math.random() >= 0.1) {
-      const temp_random = Math.floor(Math.random() * CnSingleGivenNameFemale.length)
+      const temp_random = Math.floor(
+        Math.random() * CnSingleGivenNameFemale.length
+      )
       GivenName = CnSingleGivenNameFemale[temp_random]
     } else {
       const temp_random = Math.floor(Math.random() * CnGivenNameFemale.length)

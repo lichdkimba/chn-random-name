@@ -1,3 +1,3 @@
-import { Name } from "./NameMain";
+import { Name } from './NameMain'
 
 export { Name }
