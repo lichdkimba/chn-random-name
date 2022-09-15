@@ -9,7 +9,7 @@ test('generate Female 100', () => {
     names.push(name)
     expect(typeof name).toBe('string')
   }
-  console.log(names)
+  console.log('generate Female 100',names)
 })
 
 test('generate Male 100', () => {
@@ -21,7 +21,7 @@ test('generate Male 100', () => {
     names.push(name)
     expect(typeof name).toBe('string')
   }
-  console.log(names)
+  console.log('generate Male 100',names)
 })
 
 test('generate EN Female 100', () => {
@@ -34,7 +34,7 @@ test('generate EN Female 100', () => {
     names.push(name)
     expect(typeof name).toBe('string')
   }
-  console.log(names)
+  console.log('generate EN Female 100',names)
 })
 
 test('generate EN Male 100', () => {
@@ -47,7 +47,7 @@ test('generate EN Male 100', () => {
     names.push(name)
     expect(typeof name).toBe('string')
   }
-  console.log(names)
+  console.log('generate EN Male 100', names)
 })
 
 //

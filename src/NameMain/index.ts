@@ -20,6 +20,9 @@ class Name {
     this.NameOrder = 'FMG'
     this.Type = 'CHN'
     this.Gender = Math.random() >= 0.5 ? 'Female' : 'Male'
+    if (name.Gender) {
+      this.Gender = name.Gender
+    }
     if (name.Type) {
       this.Type = name.Type
     }
