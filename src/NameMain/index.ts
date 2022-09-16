@@ -29,7 +29,6 @@ class Name {
     if (name.NameOrder) {
       this.NameOrder = name.NameOrder
     }
-
     if (this.Type === 'CHN') {
       const temp_name = generate_CN_random_name({
         Gender: this.Gender,

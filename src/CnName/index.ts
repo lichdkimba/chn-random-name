@@ -10,7 +10,7 @@ const generate_CN_random_name = (config: NameProps): NameType => {
   // 生成姓氏
   FamilyName = GetFromRandomArray(CnFamilyNameData)
   if (config.Gender === 'Female') {
-    // 决定单字名或双字名
+    // 决定单字名或双字名 单字名约占 10%
     if (Math.random() >= 0.9) {
       const temp_random = Math.floor(
         Math.random() * CnSingleGivenNameFemale.length
