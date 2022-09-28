@@ -1,4 +1,4 @@
-export const GetFromRandomArray = (array: [string, number][]):string => {
+export const GetFromRandomArray = (array: [string, number][]): string => {
   let temp_max: number = array[array.length - 1][1]
   temp_max = Math.random() * temp_max
   let result = ''
@@ -12,7 +12,7 @@ export const GetFromRandomArray = (array: [string, number][]):string => {
   return result
 }
 
-export const GetFromNormalArray = (array: string[]):string => {
+export const GetFromNormalArray = (array: string[]): string => {
   let temp_max: number = array.length - 1
   temp_max = Math.floor(Math.random() * temp_max)
   return array[temp_max]
