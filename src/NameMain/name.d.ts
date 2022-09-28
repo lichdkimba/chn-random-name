@@ -5,7 +5,7 @@ type NameProps = {
   FamilyName?: string
   MiddleName?: string
   Gender?: 'Male' | 'Female'
-  Type?: 'CHN' | 'ENG'
+  Type?: 'CHN' | 'ENG' | 'JPN'
   NameOrder?: 'FMG' | 'GMF'
   NameOrderSplit?: ''
 }

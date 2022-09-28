@@ -1,12 +1,13 @@
 // 人名类
 import { generate_CN_random_name } from '../CnName'
-import { generate_EN_random_name } from "../EnName";
+import { generate_EN_random_name } from '../EnName'
+import { generate_JP_random_name } from '../JpName'
 
 class Name {
   public GivenName: string
   public FamilyName: string
   public MiddleName: string | undefined
-  public Type: 'CHN' | 'ENG'
+  public Type: 'CHN' | 'ENG' | 'JPN'
   public Gender: 'Male' | 'Female'
   public Name: string
   private readonly NameOrder: 'FMG' | 'GMF'
@@ -51,6 +52,18 @@ class Name {
       this.FamilyName = temp_name.FamilyName
       this.MiddleName = temp_name.MiddleName
     }
+    if (this.Type === 'JPN') {
+      if (typeof name.NameOrder === 'undefined') {
+        this.NameOrder = 'FMG'
+      }
+      const temp_name = generate_JP_random_name({
+        Gender: this.Gender,
+      })
+      this.GivenName = temp_name.GivenName
+      this.FamilyName = temp_name.FamilyName
+      this.MiddleName = temp_name.MiddleName
+    }
+
     if (name.GivenName) {
       this.GivenName = name.GivenName
     }
