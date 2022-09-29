@@ -2,6 +2,7 @@
 import { generate_CN_random_name } from '../CnName'
 import { generate_EN_random_name } from '../EnName'
 import { generate_JP_random_name } from '../JpName'
+import type { NameProps, NameType } from "./name";
 
 class Name {
   public GivenName: string
@@ -10,9 +11,10 @@ class Name {
   public Type: 'CHN' | 'ENG' | 'JPN'
   public Gender: 'Male' | 'Female'
   public Name: string
+  public English: NameType | undefined
   private readonly NameOrder: 'FMG' | 'GMF'
   private readonly NameOrderSplit: string
-  constructor(name: NameProps & NameConfig) {
+  constructor(name: NameProps) {
     // 默认参数
     this.GivenName = ''
     this.FamilyName = ''
@@ -59,9 +61,10 @@ class Name {
       const temp_name = generate_JP_random_name({
         Gender: this.Gender,
       })
-      this.GivenName = temp_name.GivenName
-      this.FamilyName = temp_name.FamilyName
-      this.MiddleName = temp_name.MiddleName
+      this.GivenName = temp_name.Chinese?.GivenName as string
+      this.FamilyName = temp_name.Chinese?.FamilyName as string
+      this.MiddleName = temp_name.Chinese?.MiddleName as string
+      this.English = temp_name.English
     }
 
     if (name.GivenName) {

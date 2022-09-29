@@ -2,6 +2,7 @@ import { CnFamilyNameData } from './FamilyName'
 import { CnGivenNameFemale, CnSingleGivenNameFemale } from './GivenNameFemale'
 import { CnGivenNameMale, CnSingleGivenNameMale } from './GivenNameMale'
 import { GetFromRandomArray } from '../NameMain/utils'
+import type { NameProps, NameType } from '../NameMain/name'
 
 const generate_CN_random_name = (config: NameProps): NameType => {
   let FamilyName = ''

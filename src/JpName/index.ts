@@ -1,25 +1,40 @@
 import { JpFamilyNameData } from './FamilyName'
-import { GetFromNormalArray, GetFromRandomArray } from "../NameMain/utils";
+import { GetFromNormalArray, GetFromRandomArray } from '../NameMain/utils'
 import { JpGivenNameFemale } from './GivenNameFemale'
 import { JpGivenNameMale } from './GivenNameMale'
+import type { NameProps, NameReturnType } from '../NameMain/name'
 
-const generate_JP_random_name = (config: NameProps): NameType => {
+const generate_JP_random_name = (config: NameProps): NameReturnType => {
   let FamilyName = ''
   const MiddleName = ''
   let GivenName = ''
+  let EnFamilyName = ''
+  const EnMiddleName = ''
+  let EnGivenName = ''
   // 生成姓氏
-  FamilyName = GetFromRandomArray(JpFamilyNameData)
+  const tempFamilyName = GetFromRandomArray(JpFamilyNameData)
+  FamilyName = tempFamilyName[0]
+  EnFamilyName = tempFamilyName[1]
+  let tempGivenName: string[] = ['', '']
   if (config.Gender === 'Female') {
-    GivenName = GetFromNormalArray(JpGivenNameFemale)
+    tempGivenName = GetFromNormalArray(JpGivenNameFemale)
   }
   if (config.Gender === 'Male') {
-    GivenName = GetFromNormalArray(JpGivenNameMale)
+    tempGivenName = GetFromNormalArray(JpGivenNameMale)
   }
-
+  GivenName = tempGivenName[0]
+  EnGivenName = tempGivenName[1]
   return {
-    FamilyName,
-    MiddleName,
-    GivenName,
+    Chinese: {
+      FamilyName,
+      MiddleName,
+      GivenName,
+    },
+    English: {
+      FamilyName: EnFamilyName,
+      MiddleName: EnMiddleName,
+      GivenName: EnGivenName,
+    },
   }
 }
 

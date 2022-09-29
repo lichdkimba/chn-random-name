@@ -2,6 +2,7 @@ import { EnFamilyNameData } from './FamilyName'
 import { GetFromRandomArray } from '../NameMain/utils'
 import { EnGivenNameFemale } from './GivenNameFemale'
 import { EnGivenNameMale } from './GivenNameMale'
+import type { NameProps, NameType } from '../NameMain/name'
 
 const generate_EN_random_name = (config: NameProps): NameType => {
   let FamilyName = ''

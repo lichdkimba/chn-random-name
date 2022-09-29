@@ -1,5 +1,3 @@
-type NameConfig = {}
-
 type NameProps = {
   GivenName?: string
   FamilyName?: string
@@ -8,6 +6,8 @@ type NameProps = {
   Type?: 'CHN' | 'ENG' | 'JPN'
   NameOrder?: 'FMG' | 'GMF'
   NameOrderSplit?: ''
+  English?: NameType
+  Chinese?: NameType
 }
 
 type NameType = {
@@ -15,3 +15,10 @@ type NameType = {
   FamilyName: string
   MiddleName: string
 }
+
+type NameReturnType = {
+  Chinese?: NameType
+  English?: NameType
+}
+
+export { NameType, NameProps, NameReturnType }

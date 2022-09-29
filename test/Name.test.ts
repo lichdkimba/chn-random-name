@@ -56,11 +56,12 @@ test('generate JP Female 100', () => {
     let name = new Name({
       Gender: 'Female',
       Type: 'JPN'
-    }).Name
-    names.push(name)
-    expect(typeof name).toBe('string')
+    })
+    names.push(name.Name)
+    names.push(name.English)
+    expect(typeof name.Name).toBe('string')
   }
-  console.log('generate EN Female 100',names)
+  console.log('generate JP Female 100',names)
 })
 
 test('generate JP Male 100', () => {
@@ -69,9 +70,10 @@ test('generate JP Male 100', () => {
     let name = new Name({
       Gender: 'Male',
       Type: 'JPN'
-    }).Name
-    names.push(name)
-    expect(typeof name).toBe('string')
+    })
+    names.push(name.Name)
+    names.push(name.English)
+    expect(typeof name.Name).toBe('string')
   }
   console.log('generate EN Male 100', names)
 })
