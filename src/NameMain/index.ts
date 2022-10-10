@@ -10,7 +10,7 @@ class Name {
   public Gender: 'Male' | 'Female'
   public Chinese: NameType | undefined
   public English: NameType | undefined
-  private readonly NameOrder: 'FMG' | 'GMF'
+  private readonly ForceNameOrder: 'FMG' | 'GMF' | undefined
   private readonly ForceNameOrderSplit: string | undefined
   constructor(name: NameProps) {
     this.Target = 'CHN'
@@ -19,7 +19,7 @@ class Name {
     }
     // 默认参数
     this.ForceNameOrderSplit = undefined
-    this.NameOrder = 'FMG'
+    this.ForceNameOrder = undefined
     this.Type = 'CHN'
     this.Gender = Math.random() >= 0.5 ? 'Female' : 'Male'
     if (name.Gender) {
@@ -29,7 +29,7 @@ class Name {
       this.Type = name.Type
     }
     if (name.NameOrder) {
-      this.NameOrder = name.NameOrder
+      this.ForceNameOrder = name.NameOrder
     }
     if (this.Type === 'CHN') {
       const temp_name = generate_CN_random_name({
@@ -38,9 +38,6 @@ class Name {
       this.Chinese = temp_name
     }
     if (this.Type === 'ENG') {
-      if (typeof name.NameOrder === 'undefined') {
-        this.NameOrder = 'GMF'
-      }
       const temp_name = generate_EN_random_name({
         Gender: this.Gender,
       })
@@ -48,9 +45,6 @@ class Name {
       this.English = temp_name.English
     }
     if (this.Type === 'JPN') {
-      if (typeof name.NameOrder === 'undefined') {
-        this.NameOrder = 'FMG'
-      }
       const temp_name = generate_JP_random_name({
         Gender: this.Gender,
       })
@@ -58,6 +52,21 @@ class Name {
       this.English = temp_name.English
     }
   }
+
+  public get NameOrder(): string {
+    let returnValue: string | undefined = 'FMG'
+    if (this.Target === 'CHN') {
+      returnValue = this.Chinese?.NameOrder
+    }
+    if (this.Target === 'ENG') {
+      returnValue = this.English?.NameOrder
+    }
+    if (returnValue) {
+      return returnValue
+    }
+    return 'FMG'
+  }
+
   public get FamilyName(): string {
     let returnValue: string | undefined = ''
     if (this.Target === 'CHN') {

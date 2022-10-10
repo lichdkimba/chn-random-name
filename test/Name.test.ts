@@ -32,7 +32,8 @@ test('generate EN Female 100', () => {
       Type: 'ENG'
     })
     names.push(name.Name)
-    names.push(name.English)
+    name.Target = 'ENG'
+    names.push(name.Name)
     expect(typeof name.Name).toBe('string')
   }
   console.log('generate EN Female 100',names)

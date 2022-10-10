@@ -22,4 +22,13 @@ function GetFromNormalArray(array: string[] | string[][]): string | string[] {
   temp_max = Math.floor(Math.random() * temp_max)
   return array[temp_max]
 }
-export { GetFromNormalArray, GetFromRandomArray }
+
+// 首字母大写
+const NameUpperCase = (string: string): string => {
+  if (string.length >= 2) {
+    return string[0].toUpperCase() + string.slice(1).toLowerCase()
+  }
+  return string
+}
+
+export { GetFromNormalArray, GetFromRandomArray, NameUpperCase }

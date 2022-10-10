@@ -1,13 +1,13 @@
 import { EnFamilyNameData } from './FamilyName'
-import { GetFromRandomArray } from '../NameMain/utils'
+import { GetFromRandomArray, NameUpperCase } from '../NameMain/utils'
 import { EnGivenNameFemale } from './GivenNameFemale'
 import { EnGivenNameMale } from './GivenNameMale'
-import type { NameProps } from '../NameMain/name'
+import type { NameProps, NameType } from "../NameMain/name";
 import { NameReturnType } from '../NameMain/name'
+import { Name } from "../NameMain";
 
 const generate_EN_random_name = (config: NameProps): NameReturnType => {
   let FamilyName: string[] = []
-  const MiddleName = undefined
   let GivenName: string[] = []
   FamilyName = GetFromRandomArray(EnFamilyNameData)
   if (config.Gender === 'Female') {
@@ -19,17 +19,19 @@ const generate_EN_random_name = (config: NameProps): NameReturnType => {
 
   // 生成姓氏
 
-  const Chinese = {
-    GivenName: GivenName[1],
+  const Chinese: NameType = {
+    GivenName: NameUpperCase(GivenName[1]),
     MiddleName: undefined,
-    FamilyName: FamilyName[1],
+    FamilyName: NameUpperCase(FamilyName[1]),
     NameOrderSplit: '·',
+    NameOrder: 'FMG',
   }
-  const English = {
-    GivenName: GivenName[0],
+  const English: NameType = {
+    GivenName: NameUpperCase(GivenName[0]),
     MiddleName: undefined,
-    FamilyName: FamilyName[0],
+    FamilyName: NameUpperCase(FamilyName[0]),
     NameOrderSplit: ' ',
+    NameOrder: 'FMG',
   }
   return {
     Chinese: Chinese,
