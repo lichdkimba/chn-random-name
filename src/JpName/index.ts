@@ -6,15 +6,22 @@ import type { NameProps, NameReturnType } from '../NameMain/name'
 
 const generate_JP_random_name = (config: NameProps): NameReturnType => {
   let FamilyName = ''
-  const MiddleName = ''
+  const MiddleName = undefined
   let GivenName = ''
   let EnFamilyName = ''
-  const EnMiddleName = ''
+  const EnMiddleName = undefined
   let EnGivenName = ''
+  // 首字母大写
+  const titleCase = (string: string) => {
+    if (string.length >= 2) {
+      return string[0].toUpperCase() + string.slice(1).toLowerCase()
+    }
+    return string
+  }
   // 生成姓氏
   const tempFamilyName = GetFromRandomArray(JpFamilyNameData)
   FamilyName = tempFamilyName[0]
-  EnFamilyName = tempFamilyName[1]
+  EnFamilyName = titleCase(tempFamilyName[1])
   let tempGivenName: string[] = ['', '']
   if (config.Gender === 'Female') {
     tempGivenName = GetFromNormalArray(JpGivenNameFemale)
@@ -23,17 +30,19 @@ const generate_JP_random_name = (config: NameProps): NameReturnType => {
     tempGivenName = GetFromNormalArray(JpGivenNameMale)
   }
   GivenName = tempGivenName[0]
-  EnGivenName = tempGivenName[1]
+  EnGivenName = titleCase(tempGivenName[1])
   return {
     Chinese: {
       FamilyName,
       MiddleName,
       GivenName,
+      NameOrderSplit: '',
     },
     English: {
       FamilyName: EnFamilyName,
       MiddleName: EnMiddleName,
       GivenName: EnGivenName,
+      NameOrderSplit: ' ',
     },
   }
 }

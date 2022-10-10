@@ -30,9 +30,10 @@ test('generate EN Female 100', () => {
     let name = new Name({
       Gender: 'Female',
       Type: 'ENG'
-    }).Name
-    names.push(name)
-    expect(typeof name).toBe('string')
+    })
+    names.push(name.Name)
+    names.push(name.English)
+    expect(typeof name.Name).toBe('string')
   }
   console.log('generate EN Female 100',names)
 })
@@ -58,7 +59,6 @@ test('generate JP Female 100', () => {
       Type: 'JPN'
     })
     names.push(name.Name)
-    names.push(name.English)
     expect(typeof name.Name).toBe('string')
   }
   console.log('generate JP Female 100',names)
@@ -72,8 +72,20 @@ test('generate JP Male 100', () => {
       Type: 'JPN'
     })
     names.push(name.Name)
-    names.push(name.English)
     expect(typeof name.Name).toBe('string')
   }
-  console.log('generate EN Male 100', names)
+  console.log('generate JP Male 100', names)
+})
+
+test('generate JP Male 100', () => {
+  let names = []
+  for (let i = 0; i < 100; i++) {
+    let name = new Name({
+      Target: 'ENG',
+      Type: 'JPN'
+    })
+    names.push(name.Name)
+    expect(typeof name.Name).toBe('string')
+  }
+  console.log('generate JP ENG Male 100', names)
 })

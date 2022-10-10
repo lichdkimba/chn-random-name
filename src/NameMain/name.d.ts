@@ -3,9 +3,10 @@ type NameProps = {
   FamilyName?: string
   MiddleName?: string
   Gender?: 'Male' | 'Female'
+  Target?: 'CHN' | 'ENG'
   Type?: 'CHN' | 'ENG' | 'JPN'
   NameOrder?: 'FMG' | 'GMF'
-  NameOrderSplit?: ''
+  NameOrderSplit?: string
   English?: NameType
   Chinese?: NameType
 }
@@ -13,7 +14,9 @@ type NameProps = {
 type NameType = {
   GivenName: string
   FamilyName: string
-  MiddleName: string
+  MiddleName: string | undefined
+  NameOrderSplit?: string
+  NameOrder?: 'FMG' | 'GMF'
 }
 
 type NameReturnType = {

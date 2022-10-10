@@ -2,24 +2,23 @@
 import { generate_CN_random_name } from '../CnName'
 import { generate_EN_random_name } from '../EnName'
 import { generate_JP_random_name } from '../JpName'
-import type { NameProps, NameType } from "./name";
+import type { NameProps, NameType } from './name'
 
 class Name {
-  public GivenName: string
-  public FamilyName: string
-  public MiddleName: string | undefined
   public Type: 'CHN' | 'ENG' | 'JPN'
+  public Target: 'CHN' | 'ENG'
   public Gender: 'Male' | 'Female'
-  public Name: string
+  public Chinese: NameType | undefined
   public English: NameType | undefined
   private readonly NameOrder: 'FMG' | 'GMF'
-  private readonly NameOrderSplit: string
+  private readonly ForceNameOrderSplit: string | undefined
   constructor(name: NameProps) {
+    this.Target = 'CHN'
+    if (name.Target) {
+      this.Target = name.Target
+    }
     // 默认参数
-    this.GivenName = ''
-    this.FamilyName = ''
-    this.Name = 'test'
-    this.NameOrderSplit = ''
+    this.ForceNameOrderSplit = undefined
     this.NameOrder = 'FMG'
     this.Type = 'CHN'
     this.Gender = Math.random() >= 0.5 ? 'Female' : 'Male'
@@ -36,23 +35,17 @@ class Name {
       const temp_name = generate_CN_random_name({
         Gender: this.Gender,
       })
-      this.GivenName = temp_name.GivenName
-      this.FamilyName = temp_name.FamilyName
-      this.MiddleName = temp_name.MiddleName
+      this.Chinese = temp_name
     }
     if (this.Type === 'ENG') {
-      if (typeof name.NameOrderSplit === 'undefined') {
-        this.NameOrderSplit = '·'
-      }
       if (typeof name.NameOrder === 'undefined') {
         this.NameOrder = 'GMF'
       }
       const temp_name = generate_EN_random_name({
         Gender: this.Gender,
       })
-      this.GivenName = temp_name.GivenName
-      this.FamilyName = temp_name.FamilyName
-      this.MiddleName = temp_name.MiddleName
+      this.Chinese = temp_name.Chinese
+      this.English = temp_name.English
     }
     if (this.Type === 'JPN') {
       if (typeof name.NameOrder === 'undefined') {
@@ -61,36 +54,76 @@ class Name {
       const temp_name = generate_JP_random_name({
         Gender: this.Gender,
       })
-      this.GivenName = temp_name.Chinese?.GivenName as string
-      this.FamilyName = temp_name.Chinese?.FamilyName as string
-      this.MiddleName = temp_name.Chinese?.MiddleName as string
+      this.Chinese = temp_name.Chinese
       this.English = temp_name.English
     }
+  }
+  public get FamilyName(): string {
+    let returnValue: string | undefined = ''
+    if (this.Target === 'CHN') {
+      returnValue = this.Chinese?.FamilyName
+    }
+    if (this.Target === 'ENG') {
+      returnValue = this.English?.FamilyName
+    }
+    if (returnValue) {
+      return returnValue
+    }
+    return ''
+  }
+  public get MiddleName(): string | undefined {
+    let returnValue: string | undefined = ''
+    if (this.Target === 'CHN') {
+      returnValue = this.Chinese?.MiddleName
+    }
+    if (this.Target === 'ENG') {
+      returnValue = this.English?.MiddleName
+    }
+    return returnValue
+  }
+  public get GivenName(): string {
+    let returnValue: string | undefined = ''
+    if (this.Target === 'CHN') {
+      returnValue = this.Chinese?.GivenName
+    }
+    if (this.Target === 'ENG') {
+      returnValue = this.English?.GivenName
+    }
+    if (returnValue) {
+      return returnValue
+    }
+    return ''
+  }
 
-    if (name.GivenName) {
-      this.GivenName = name.GivenName
+  public get NameOrderSplit(): string {
+    if (typeof this.ForceNameOrderSplit !== 'undefined') {
+      return this.ForceNameOrderSplit
     }
-    if (name.FamilyName) {
-      this.FamilyName = name.FamilyName
+    let returnValue: string | undefined = ''
+    if (this.Target === 'CHN') {
+      returnValue = this.Chinese?.NameOrderSplit
     }
-    if (name.MiddleName) {
-      this.MiddleName = name.MiddleName
+    if (this.Target === 'ENG') {
+      returnValue = this.English?.NameOrderSplit
     }
-
+    return returnValue ? returnValue : ''
+  }
+  public get Name(): string {
     if (this.NameOrder === 'FMG') {
       if (this.MiddleName) {
-        this.Name = `${this.FamilyName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.GivenName}`
+        return `${this.FamilyName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.GivenName}`
       } else {
-        this.Name = `${this.FamilyName}${this.NameOrderSplit}${this.GivenName}`
+        return `${this.FamilyName}${this.NameOrderSplit}${this.GivenName}`
       }
     }
     if (this.NameOrder === 'GMF') {
       if (this.MiddleName) {
-        this.Name = `${this.GivenName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.FamilyName}`
+        return `${this.GivenName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.FamilyName}`
       } else {
-        this.Name = `${this.GivenName}${this.NameOrderSplit}${this.FamilyName}`
+        return `${this.GivenName}${this.NameOrderSplit}${this.FamilyName}`
       }
     }
+    return ''
   }
 }
 

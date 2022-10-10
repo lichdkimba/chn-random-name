@@ -6,7 +6,7 @@ import type { NameProps, NameType } from '../NameMain/name'
 
 const generate_CN_random_name = (config: NameProps): NameType => {
   let FamilyName = ''
-  const MiddleName = ''
+  const MiddleName = undefined
   let GivenName = ''
   // 生成姓氏
   FamilyName = GetFromRandomArray(CnFamilyNameData)
