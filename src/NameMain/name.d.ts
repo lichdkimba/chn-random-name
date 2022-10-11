@@ -7,8 +7,9 @@ type NameProps = {
   Type?: 'CHN' | 'ENG' | 'JPN'
   NameOrder?: 'FMG' | 'GMF'
   NameOrderSplit?: string
-  English?: NameType
-  Chinese?: NameType
+  Normalize?: boolean
+  English?: NameTypeConstructor
+  Chinese?: NameTypeConstructor
 }
 
 type NameType = {
@@ -17,6 +18,16 @@ type NameType = {
   MiddleName: string | undefined
   NameOrderSplit?: string
   NameOrder?: 'FMG' | 'GMF'
+  Normalize?: boolean
+}
+
+type NameTypeConstructor = {
+  GivenName?: string
+  FamilyName?: string
+  MiddleName?: string | undefined
+  NameOrderSplit?: string
+  NameOrder?: 'FMG' | 'GMF'
+  Normalize?: boolean
 }
 
 type NameReturnType = {

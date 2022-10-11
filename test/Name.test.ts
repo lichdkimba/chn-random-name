@@ -5,9 +5,11 @@ test('generate Female 100', () => {
   for (let i = 0; i < 100; i++) {
     let name = new Name({
       Gender: 'Female'
-    }).Name
-    names.push(name)
-    expect(typeof name).toBe('string')
+    })
+    names.push(name.Name)
+    name.Target = 'ENG'
+    names.push(name.Name)
+    expect(typeof name.Name).toBe('string')
   }
   console.log('generate Female 100',names)
 })
@@ -73,20 +75,33 @@ test('generate JP Male 100', () => {
       Type: 'JPN'
     })
     names.push(name.Name)
+    name.Target = 'ENG'
+    names.push(name.Name)
     expect(typeof name.Name).toBe('string')
   }
   console.log('generate JP Male 100', names)
 })
 
-test('generate JP Male 100', () => {
+test('other constructor', () => {
   let names = []
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 10; i++) {
     let name = new Name({
-      Target: 'ENG',
-      Type: 'JPN'
+      Gender: 'Male',
+      Type: 'CHN',
+      English: {
+        NameOrderSplit: '-',
+        Normalize: true,
+        NameOrder: 'FMG',
+        FamilyName: 'Zhang'
+      },
+      Chinese: {
+        FamilyName: '张',
+      }
     })
+    names.push(name.Name)
+    name.Target = 'ENG'
     names.push(name.Name)
     expect(typeof name.Name).toBe('string')
   }
-  console.log('generate JP ENG Male 100', names)
+  console.log('generate JP Male 100', names)
 })

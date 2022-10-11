@@ -3,6 +3,7 @@ import { generate_CN_random_name } from '../CnName'
 import { generate_EN_random_name } from '../EnName'
 import { generate_JP_random_name } from '../JpName'
 import type { NameProps, NameType } from './name'
+import { NormalizeEnglish } from "./utils";
 
 class Name {
   public Type: 'CHN' | 'ENG' | 'JPN'
@@ -10,6 +11,7 @@ class Name {
   public Gender: 'Male' | 'Female'
   public Chinese: NameType | undefined
   public English: NameType | undefined
+  private readonly ForceNormalize: boolean | undefined
   private readonly ForceNameOrder: 'FMG' | 'GMF' | undefined
   private readonly ForceNameOrderSplit: string | undefined
   constructor(name: NameProps) {
@@ -20,6 +22,7 @@ class Name {
     // 默认参数
     this.ForceNameOrderSplit = undefined
     this.ForceNameOrder = undefined
+    this.ForceNormalize = undefined
     this.Type = 'CHN'
     this.Gender = Math.random() >= 0.5 ? 'Female' : 'Male'
     if (name.Gender) {
@@ -31,11 +34,15 @@ class Name {
     if (name.NameOrder) {
       this.ForceNameOrder = name.NameOrder
     }
+    if (name.Normalize) {
+      this.ForceNormalize = name.Normalize
+    }
     if (this.Type === 'CHN') {
       const temp_name = generate_CN_random_name({
         Gender: this.Gender,
       })
-      this.Chinese = temp_name
+      this.Chinese = temp_name.Chinese
+      this.English = temp_name.English
     }
     if (this.Type === 'ENG') {
       const temp_name = generate_EN_random_name({
@@ -51,9 +58,35 @@ class Name {
       this.Chinese = temp_name.Chinese
       this.English = temp_name.English
     }
+
+    this.Chinese = {
+      ...(this.Chinese as NameType),
+      ...(name.Chinese as NameType),
+    }
+    this.English = {
+      ...(this.English as NameType),
+      ...(name.English as NameType),
+    }
+  }
+
+  public get Normalize(): boolean | undefined {
+    if (typeof this.ForceNormalize !== 'undefined') {
+      return this.ForceNormalize
+    }
+    let returnValue: boolean | undefined = false
+    if (this.Target === 'CHN') {
+      returnValue = this.Chinese?.Normalize
+    }
+    if (this.Target === 'ENG') {
+      returnValue = this.English?.Normalize
+    }
+    return returnValue ? returnValue : false
   }
 
   public get NameOrder(): string {
+    if (typeof this.ForceNameOrder !== 'undefined') {
+      return this.ForceNameOrder
+    }
     let returnValue: string | undefined = 'FMG'
     if (this.Target === 'CHN') {
       returnValue = this.Chinese?.NameOrder
@@ -118,21 +151,26 @@ class Name {
     return returnValue ? returnValue : ''
   }
   public get Name(): string {
+    let returnName = ''
     if (this.NameOrder === 'FMG') {
       if (this.MiddleName) {
-        return `${this.FamilyName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.GivenName}`
+        returnName = `${this.FamilyName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.GivenName}`
       } else {
-        return `${this.FamilyName}${this.NameOrderSplit}${this.GivenName}`
+        returnName = `${this.FamilyName}${this.NameOrderSplit}${this.GivenName}`
       }
     }
     if (this.NameOrder === 'GMF') {
       if (this.MiddleName) {
-        return `${this.GivenName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.FamilyName}`
+        returnName = `${this.GivenName}${this.NameOrderSplit}${this.MiddleName}${this.NameOrderSplit}${this.FamilyName}`
       } else {
-        return `${this.GivenName}${this.NameOrderSplit}${this.FamilyName}`
+        returnName = `${this.GivenName}${this.NameOrderSplit}${this.FamilyName}`
       }
     }
-    return ''
+
+    if (this.Normalize) {
+      returnName = NormalizeEnglish(returnName)
+    }
+    return returnName
   }
 }
 

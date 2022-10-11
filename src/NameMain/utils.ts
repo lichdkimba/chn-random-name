@@ -31,4 +31,14 @@ const NameUpperCase = (string: string): string => {
   return string
 }
 
-export { GetFromNormalArray, GetFromRandomArray, NameUpperCase }
+// 转为普通英文字母
+const NormalizeEnglish = (string: string): string => {
+  return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
+export {
+  GetFromNormalArray,
+  GetFromRandomArray,
+  NameUpperCase,
+  NormalizeEnglish,
+}
