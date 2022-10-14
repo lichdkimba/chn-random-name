@@ -1,19 +1,25 @@
-function GetFromRandomArray(array: [string[], number][]): string[]
-function GetFromRandomArray(array: [string, number][]): string
+function GetFromRandomArray(array: [string[], number][], type? : 'Normal' | 'Random'): string[]
+function GetFromRandomArray(array: [string, number][], type? : 'Normal' | 'Random'): string
 function GetFromRandomArray(
-  array: [string[] | string, number][]
+  array: [string[] | string, number][],
+  type : 'Normal' | 'Random' = 'Normal'
 ): string | string[] {
-  let temp_max: number = array[array.length - 1][1]
-  temp_max = Math.random() * temp_max
-  let result: string | string[] = ''
-  array.some((item) => {
-    if (temp_max >= item[1]) {
-      return false
+    if (type === 'Random') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      return GetFromNormalArray(array.map(item => item[0]))
     }
-    result = item[0]
-    return true
-  })
-  return result
+    let temp_max: number = array[array.length - 1][1]
+    temp_max = Math.random() * temp_max
+    let result: string | string[] = ''
+    array.some((item) => {
+      if (temp_max >= item[1]) {
+        return false
+      }
+      result = item[0]
+      return true
+    })
+    return result
 }
 function GetFromNormalArray(array: string[]): string
 function GetFromNormalArray(array: string[][]): string[]

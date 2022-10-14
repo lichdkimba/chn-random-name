@@ -40,6 +40,7 @@ class Name {
     if (this.Type === 'CHN') {
       const temp_name = generate_CN_random_name({
         Gender: this.Gender,
+        Distribution: name.Distribution
       })
       this.Chinese = temp_name.Chinese
       this.English = temp_name.English
@@ -47,6 +48,7 @@ class Name {
     if (this.Type === 'ENG') {
       const temp_name = generate_EN_random_name({
         Gender: this.Gender,
+        Distribution: name.Distribution
       })
       this.Chinese = temp_name.Chinese
       this.English = temp_name.English
@@ -54,6 +56,7 @@ class Name {
     if (this.Type === 'JPN') {
       const temp_name = generate_JP_random_name({
         Gender: this.Gender,
+        Distribution: name.Distribution
       })
       this.Chinese = temp_name.Chinese
       this.English = temp_name.English

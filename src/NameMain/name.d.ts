@@ -3,6 +3,7 @@ type NameProps = {
   FamilyName?: string
   MiddleName?: string
   Gender?: 'Male' | 'Female'
+  Distribution?: 'Normal' | 'Random'
   Target?: 'CHN' | 'ENG'
   Type?: 'CHN' | 'ENG' | 'JPN'
   NameOrder?: 'FMG' | 'GMF'

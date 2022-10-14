@@ -9,7 +9,7 @@ const generate_CN_random_name = (config: NameProps): NameReturnType => {
   const MiddleName = undefined
   let GivenName: string[] = []
   // 生成姓氏
-  FamilyName = GetFromRandomArray(CnFamilyNameData)
+  FamilyName = GetFromRandomArray(CnFamilyNameData, config.Distribution)
   if (config.Gender === 'Female') {
     // 决定单字名或双字名 单字名约占 10%
     if (Math.random() >= 0.9) {

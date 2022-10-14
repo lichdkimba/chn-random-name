@@ -88,19 +88,18 @@ test('other constructor', () => {
     let name = new Name({
       Gender: 'Male',
       Type: 'CHN',
+      Distribution: "Random",
       English: {
         NameOrderSplit: '-',
         Normalize: true,
         NameOrder: 'FMG',
-        FamilyName: 'Zhang'
       },
       Chinese: {
-        FamilyName: '张',
       }
     })
     names.push(name.Name)
     name.Target = 'ENG'
-    names.push(name.Name)
+    names.push(name.Names)
     expect(typeof name.Name).toBe('string')
   }
   console.log('generate JP Male 100', names)

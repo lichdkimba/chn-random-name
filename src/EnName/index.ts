@@ -8,12 +8,12 @@ import { NameReturnType } from '../NameMain/name'
 const generate_EN_random_name = (config: NameProps): NameReturnType => {
   let FamilyName: string[] = []
   let GivenName: string[] = []
-  FamilyName = GetFromRandomArray(EnFamilyNameData)
+  FamilyName = GetFromRandomArray(EnFamilyNameData, config.Distribution)
   if (config.Gender === 'Female') {
-    GivenName = GetFromRandomArray(EnGivenNameFemale)
+    GivenName = GetFromRandomArray(EnGivenNameFemale, config.Distribution)
   }
   if (config.Gender === 'Male') {
-    GivenName = GetFromRandomArray(EnGivenNameMale)
+    GivenName = GetFromRandomArray(EnGivenNameMale, config.Distribution)
   }
 
   // 生成姓氏

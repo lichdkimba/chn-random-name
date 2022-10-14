@@ -13,7 +13,7 @@ const generate_JP_random_name = (config: NameProps): NameReturnType => {
   let EnGivenName = ''
 
   // 生成姓氏
-  const tempFamilyName = GetFromRandomArray(JpFamilyNameData)
+  const tempFamilyName = GetFromRandomArray(JpFamilyNameData, config.Distribution)
   FamilyName = tempFamilyName[0]
   EnFamilyName = NameUpperCase(tempFamilyName[1])
   let tempGivenName: string[] = ['', '']
