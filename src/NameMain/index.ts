@@ -172,6 +172,20 @@ class Name {
     }
     return returnName
   }
+
+  public get Names(): { Chinese: string, English: string } {
+    const tempTarget = this.Target
+    this.Target = 'CHN'
+    const returnValue = {
+      Chinese: '',
+      English: ''
+    }
+    returnValue.Chinese = this.Name
+    this.Target = 'ENG'
+    returnValue.English = this.Name
+    this.Target = tempTarget
+    return returnValue
+  }
 }
 
 export { Name }
