@@ -1,20 +1,20 @@
 English | [简体中文](./README-zh_CN.md)
 
-Generate English, Chinese or Japanese Names randomly.
+随机生成英文，中文或日文人名。
 
-# Install
+# 安装
 ```bash
 npm install chn-random-name
 ```
 
-# Basic Usage
+# 基本使用
 ```javascript
 import { Name } from 'chn-random-name'
 let name = new Name().Name
 console.log(name) // 张家都
 ```
 
-# Advanced Usage
+# 进阶使用
 ```javascript
 import { Name } from 'chn-random-name'
 let nameList = Array(10).fill('').map(item => {new Name({
@@ -22,7 +22,7 @@ let nameList = Array(10).fill('').map(item => {new Name({
   Type: 'ENG' // target name source
 }).Name})
 console.log(name)
-/** 
+/**
  * [
  '安娜·杰克逊',
  '贝利·戈麦斯',
@@ -38,23 +38,23 @@ console.log(name)
  * **/
 ```
 
-## All Name Configs
+## 所有生成设置
 ```typescript
 type NameProps = {
-  Gender?: 'Male' | 'Female' // assign gender of target name; default: random
-  Target?: 'CHN' | 'ENG' // target language of .Name attribute; default: CHN
-  Type?: 'CHN' | 'ENG' | 'JPN' // assign type of name; default: CHN
-  NameOrder?: 'FMG' | 'GMF' // overwrite name order; Family Name in front or Given Name in fron
-  NameOrderSplit?: string // Spliter between Family Name and GivenName
-  Normalize?: boolean // if keep variant of English Character
-  // below support FamilyName,GivenName,MiddleName,NameOrder & NameOrderSplit
-  English?: NameTypeConstructor // overWrite Name setting of target ENG return
-  Chinese?: NameTypeConstructor // overWrite Name setting of target CHN return
+  Gender?: 'Male' | 'Female' // 指定性别；不同性别的生成结果有明显不同
+  Target?: 'CHN' | 'ENG' // 目标结果，支持生成结果因为英文字母或汉字
+  Type?: 'CHN' | 'ENG' | 'JPN' // 生成中文、英文或日文名
+  NameOrder?: 'FMG' | 'GMF' // 强制更改名字的顺序，GiveName在前或在后
+  NameOrderSplit?: string // 强制更改姓氏和名字间的间隔
+  Normalize?: boolean // 生成的英文字母结果中，是否带有发音符号
+  // 下面的支持强制更改FamilyName,GivenName,MiddleName,NameOrder或NameOrderSplit
+  English?: NameTypeConstructor // 强制更改英文字母输出结果
+  Chinese?: NameTypeConstructor // 强制更改汉字输出结果
 }
 
 ```
 
-## Example
+## 例子
 ```typescript
 let nameList = Array(10).fill('').map(item => {
   const tempName = new Name({
@@ -70,12 +70,12 @@ let nameList = Array(10).fill('').map(item => {
     }
   })
   let returnValue = [tempName.Name]
-  // Can overWrite some attribute of language
+  // 可以强制更改部分参数
   if (tempName.English) {
     tempName.English.Normalize = true
   }
   returnValue.push(tempName.Name)
-  // Can change target language after spawn
+  // 可以强制更改输出结果
   tempName.Target = 'CHN'
   returnValue.push(tempName.Name)
   return returnValue
@@ -97,7 +97,7 @@ console.log(nameList)
 *  */
 ```
 
-# Credit (Data Sources)
+# 数据源
 ## Chinese Names
 https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A7%93%E6%B0%8F%E6%8E%92%E5%90%8D
 https://github.com/wainshine/Chinese-Names-Corpus

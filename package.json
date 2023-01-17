@@ -1,6 +1,6 @@
 {
   "name": "chn-random-name",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
